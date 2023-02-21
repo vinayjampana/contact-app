@@ -1,0 +1,24 @@
+.createModalContent {
+
+    /* border: solid;
+    border-color: aqua;
+    border-radius: 5px; */
+  
+}
+
+.formItem {
+    display: flex;
+    flex-direction: row;
+}
+
+.formItemLabel{
+    flex: 0.7
+}
+
+.formItemInput {
+    flex: 1;
+}
+
+.formActionsWrapper {
+  
+}

@@ -1,50 +1,96 @@
 import { Box, Button, Modal } from "@mui/material";
-import { useState} from 'react';
-
+import { useState, useEffect } from "react";
+import "./styles.css";
 
 function CreateModal(props) {
+  const [nameValue, setNameValue] = useState("");
+  const [numberValue, setNumberValue] = useState("");
+  const [indexValue, setIndexValue] = useState("");
 
-    const [nameValue, setNameValue] = useState('');
-    const [numberValue, setNumberValue] = useState('');
+  useEffect(() => {
+    if (props.editData) {
+      setNameValue(props.editData.name);
+      setNumberValue(props.editData.number);
+      setIndexValue(props.editData.index);
+    }
+  }, []);
 
-
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 150,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "70vw",
+    bgcolor: "#001f40",
+    border: "2px solid #64ffdb",
+    color: "#cdd8f3",
     boxShadow: 24,
     p: 4,
   };
 
   return (
     <>
-      <Modal open={true}  aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-            <Box sx={style}>
-            <span>
-          <div>
-            <span> Name </span>{" "}
-            <span>
-              {" "}
-              <input onChange={(e) => setNameValue(e.target.value) } />
+      <Modal
+        open={true}
+        className="createModal"
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} className="createModalContent">
+          <span>
+            <div className="formItem name">
+              <span className="formItemLabel"> Name </span>{" "}
+              <span className="formItemInput">
+                {" "}
+                <input
+                  value={nameValue}
+                  style={{ width: "80%" }}
+                  onChange={(e) => setNameValue(e.target.value)}
+                />
+              </span>
+            </div>
+            <div className="formItem number">
+              <span className="formItemLabel"> Number</span>{" "}
+              <span className="formItemInput">
+                {" "}
+                <input
+                  value={numberValue}
+                  style={{ width: "80%" }}
+                  onChange={(e) => {
+                    if (!isNaN(e.target.value)) {
+                      setNumberValue(e.target.value);
+                    }
+                  }}
+                />{" "}
+              </span>
+            </div>
+            <span className="formActionsWrapper">
+              <Button
+                onClick={() => {
+                  if (numberValue.length !== 10) {
+                    alert("Phone number should be 10 Digits");
+                  } else {
+                    if (!props.editData) {
+                      props.onSubmit(
+                        { name: nameValue, number: numberValue },
+                        "create"
+                      );
+                    } else {
+                      props.onSubmit(
+                        { name: nameValue, number: numberValue, index: indexValue },
+                        "edit"
+                      );
+                    }
+                  }
+                }}
+                // disabled={isSubmitDisabled}
+              >
+                Submit
+              </Button>{" "}
+              <Button onClick={() => props.onCancel()}>Cancel</Button>
             </span>
-          </div>
-          <div>
-            <span> Number</span>{" "}
-            <span>
-              {" "}
-              <input onChange={(e) => setNumberValue(e.target.value) }   />{" "}
-            </span>
-          </div>
-          <Button onClick={() => props.onSubmit({ name: nameValue, number: numberValue}) }>Submit</Button> <Button onClick={() => props.onCancel()}>Cancel</Button>
-        </span>
-            </Box>
-        
+          </span>
+        </Box>
       </Modal>
     </>
   );

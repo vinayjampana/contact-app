@@ -12,12 +12,6 @@ function App() {
       <Route path="/" element={<ContactListing />} />
       <Route path="/contacts" element={<ContactListing />} />
       <Route path="/contacts/:id/view" element={<ContactView />} />
-      
-
-
-
-      
-
       </Routes>
      
     </div>
