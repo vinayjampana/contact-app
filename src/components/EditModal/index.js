@@ -51,6 +51,7 @@ function EditModal(props) {
               </span>
             </div>
             <Button
+              
               onClick={() =>
                 props.onSubmit({ name: nameValue, number: numberValue, index: indexValue })
               }

@@ -1,0 +1,45 @@
+.contactListingWrapper{
+    color: #cdd8f3;
+}
+
+.button {
+    color: #cdd8f3 ;
+}
+
+.itemWrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.itemNumber{
+    flex: 0.7
+
+}
+
+.itemContent{
+ flex: 1;
+ display: flex;
+ align-items: center;
+ flex-wrap: wrap;
+ 
+}
+
+.itemName {
+    width: 100%;
+    display: flex;
+}
+
+.itemPhone {
+    width: 100%;
+    display: flex;
+    /* align-content: center; */
+
+}
+
+.itemEditButton{
+    flex: 0.7;
+    display: flex;
+    align-items: center;
+
+}
