@@ -8,7 +8,7 @@ function CreateModal(props) {
   const [indexValue, setIndexValue] = useState("");
 
   useEffect(() => {
-    if (props.editData) {
+    if (props.modalAction === 'edit') {
       setNameValue(props.editData.name);
       setNumberValue(props.editData.number);
       setIndexValue(props.editData.index);
@@ -70,15 +70,15 @@ function CreateModal(props) {
                   if (numberValue.length !== 10) {
                     alert("Phone number should be 10 Digits");
                   } else {
-                    if (!props.editData) {
+                    if (props.modalAction === 'create') {
                       props.onSubmit(
                         { name: nameValue, number: numberValue },
-                        "create"
+                        props.modalAction
                       );
                     } else {
                       props.onSubmit(
                         { name: nameValue, number: numberValue, index: indexValue },
-                        "edit"
+                        props.modalAction
                       );
                     }
                   }

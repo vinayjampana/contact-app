@@ -7,6 +7,8 @@ import "./styles.css";
 function ContactListing() {
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [editData, setEditData] = useState({});
+    const [modalAction, setModalAction] = useState('create');
+
 
   const handleEditSubmit = (data) => {
     let contactListData = localStorage.getItem("contactList");
@@ -54,7 +56,9 @@ function ContactListing() {
           color: "#cdd8f3",
           borderRadius: "3px",
         }}
-        onClick={() => setOpenCreateModal(true)}
+        onClick={() => {
+          setModalAction('create')
+          setOpenCreateModal(true)}}
       >
         {" "}
         Create
@@ -79,6 +83,7 @@ function ContactListing() {
                     index: i,
                   });
                   setOpenCreateModal(true);
+                  setModalAction('edit')
                 }}
               >
                 {" "}
@@ -92,8 +97,10 @@ function ContactListing() {
       {openCreateModal && (
         <CreateModal
           editData={editData}
+          modalAction={modalAction}
           onCancel={() => setOpenCreateModal(false)}
           onSubmit={(data, action) => {
+            console.log(action)
             if (action === "create") {
               handleSubmit(data);
             } else {
